@@ -52,7 +52,9 @@ static void	exec_helper(char **s_cmd, char **env, char **file_p)
 	char	**parts_path;
 
 	path = get_path(env);
-	if (path)
+	if (access(s_cmd[0], F_OK) == 0)
+		*file_p = s_cmd[0];
+	else if (path)
 	{
 		parts_path = ft_split(path, ':');
 		if (!parts_path)
